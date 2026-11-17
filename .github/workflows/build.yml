@@ -23,7 +23,8 @@ jobs:
           python-version: '3.12'
       - name: Install Android SDK
         run: |
-          yes | sdkmanager --licenses
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+          SDK_MANAGER="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDK_MANAGER" --licenses > /dev/null
+          "$SDK_MANAGER" "platforms;android-35" "build-tools;35.0.0"
       - name: Assemble release
         run: ./gradlew app:assembleMetaRelease
